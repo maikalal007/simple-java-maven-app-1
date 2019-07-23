@@ -1,17 +1,21 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
+    agent none
+
     stages {
         stage('Build') { 
+        agent {
+        docker {
+            image 'maven:3-alpine'
+            args '-v /root/.m2:/root/.m2'
+        }
+        } 
+
             steps {
                 sh 'mvn -B -DskipTests clean package' 
             }
         }
         stage('install and sonar parallel') {
+        agent any 
             steps {
                 parallel(install: {
                     sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
