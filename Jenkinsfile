@@ -25,6 +25,7 @@ pipeline {
                     step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
                 }
             }        
+        }
         stage('Test') { 
             steps {
                 sh 'mvn test' 
@@ -42,4 +43,4 @@ pipeline {
         }
     }
 }
-}
+
