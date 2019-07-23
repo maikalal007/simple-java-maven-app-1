@@ -1,4 +1,4 @@
-pipeline {
+pipeline {  
     agent {
         docker {
             image 'maven:3-alpine' 
@@ -6,6 +6,12 @@ pipeline {
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
+
+    tools {
+        jdk 'jdk8'
+        maven 'maven3'
+    }
+     
     stages {
         stage('Build') { 
             steps {
