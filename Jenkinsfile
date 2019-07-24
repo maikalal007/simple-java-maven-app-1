@@ -23,7 +23,7 @@ pipeline {
                 parallel(install: {
                     sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
                 }, sonar: {
-                    sh "mvn sonar:sonar  -e org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar -Dsonar.host.url=${env.SONARQUBE_HOST} -Dsonar.login=biplab -Dsonar.password=biplab"
+                    sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST} -Dsonar.login=biplab -Dsonar.password=biplab"
                 })
             }
             post {
